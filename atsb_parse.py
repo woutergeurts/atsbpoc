@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import sys
 from atsb_vt import atsb_vt
 
 class atsb_parse:
@@ -21,12 +22,23 @@ class atsb_parse:
 					
 		
 def transform(x,type):
-	# TBD framework for type; 30m
-	# TBD implement transformations: 2h
-	x[1] = 'aap'
+	switcher = { 
+		'test': transform_test,
+		'testing': transform_testing,
+	}
+	return switcher.get(type)(x)
+
+def transform_test(x):
 	x[0] = 'noot'
+	x[1] = 'aap'
+	return x
+
+def transform_testing(x):
+	x[0] = 'nut'
+	x[1] = 'monkey'
 	return x
 
 if __name__ == "__main__":
 	a = atsb_parse("aap")
 	a.parsefile('test/parse.csv', 'test/parse_out.csv', 'test')
+	a.parsefile('test/parse.csv', 'test/parse_out2.csv', 'testing')
