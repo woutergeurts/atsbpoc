@@ -1,8 +1,15 @@
 #!/usr/bin/python
+# TBD: anonimiseren gaat op ofwel EAN zelf of 
+# SMETERCONFCODE (EAN_MC)
+# MC = read only lookup, 
+#
+#
+#
 class atsb_vt:
 	""" documentation """
 	ean = "A.01"
 	mc = "M.101"
+	ean_mc = "A.01_M.101"
 	m_table = {}
 	
 	def __init__ (self,type,DSO):
@@ -17,14 +24,21 @@ class atsb_vt:
 		return self.m_table[input]
 
 	def dump(self):
-		# TBD voor dumpen is een simpele python manier
+		# TBD voor dumpen is een simpele python manier: 1h
 		return "vt {0} voor {1} dumped".format(self.m_type,self.m_dso)
+
+	def undump(self):
+		# TBD undumpen tegelijk met dump; (0min)
+		return True
 
 
 def anonimize(input,dso,type):
 	# hier moet een slimme lookup op basis van DSO, prefix etc komen
 	# TBD: voor anonimiseren van MC is de bijbehorende EAN nodig!!, 
-	# check of dat altijd kan
+	# check of dat altijd kan: vraag staat uit, 
+	# TBD: implement tabel EAN; 4h
+	# TBD: implement EAN_MC combi (MC tabel); 2h
+	# TBD: implement MC lookup: op dit niveau een systeemfout!!: 10min
 	print "anonimize", input, dso, type
 	return input+1;
 

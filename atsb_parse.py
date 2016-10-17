@@ -21,10 +21,14 @@ class atsb_parse:
 					fp_out.write(self.m_delimiter.join(y))
 					
 		
+#
+# TBD: deze moeten onder de class hangen (anders  geen toegang...)
+#
 def transform(x,type):
 	switcher = { 
 		'test': transform_test,
 		'testing': transform_testing,
+		'MP': replace_ean,
 	}
 	return switcher.get(type)(x)
 
@@ -37,6 +41,11 @@ def transform_testing(x):
 	x[0] = 'nut'
 	x[1] = 'monkey'
 	return x
+
+def replace_ean(x):
+	# x[0] = self.m_ean.get(x[0])  zou het moeten zijn
+	x[0] = 34 
+
 
 if __name__ == "__main__":
 	a = atsb_parse("aap")

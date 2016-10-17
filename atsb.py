@@ -6,6 +6,9 @@ from atsb_vt import atsb_vt
 from atsb_parse import atsb_parse
 
 def main():
+	# TBD: create start command (crontab startable): 4h
+	# TBD: create understandable logfile: 2h
+	#
 	global lf
 	source_dir = sys.argv[1]
 	target_dir = sys.argv[2]
@@ -16,6 +19,8 @@ def main():
 	# TBD: check validity; 10min
 	#
 	# TBD: create log class; 45min
+	#
+	# add --help option
 	lf = open(logfile, 'w')
 	tdf = open(logfile + todosuffix, 'w')
 	produce_worklist(source_dir, target_dir, tdf)
@@ -34,7 +39,6 @@ def produce_worklist(source_dir, target_dir, tdf):
 	<command> <source> <target> <size>
 	command = cp, parse_<type>, size = wc
 	"""
-	# TBD: create
 	# walk source_dir and create mkdir -p target dir
 	os.chdir(source_dir)
 	for dir_name, subdir_list, file_list in os.walk("."):
@@ -65,6 +69,7 @@ def run_worklist(tdf,donef):
 #	run command and add entry to donef
 #
 	# TBD: assumption that all files belong to same DSO!!
+	# TBD: create structure to deal with sets belonging to more DSOs: 4h
 	parser = atsb_parse("TESTDSO")
 	for line in tdf:
 		# TBD refactor for readibility; 30 min
